@@ -24,7 +24,6 @@ class Solution:
                 count += 1
                 
             else :
-                print("New Slot !!!")
                 platforms = max(count, platforms)
                 count = 1
             
