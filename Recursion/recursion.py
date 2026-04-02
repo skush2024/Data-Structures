@@ -4,13 +4,18 @@ class Recursion:
         pass
 
 
-    def log_N(self, n):
+    def log_1toN(self, n, reverse=False):
         if n == 1 :
             print(n)
+            return
 
         else :
-            self.log_N(n - 1)
-            print(n)
+            if reverse:
+                print(n)
+                self.log_1toN(n - 1, reverse)
+            else :
+                self.log_1toN(n - 1, reverse)
+                print(n)
 
     
     def factorial(self, n):
@@ -86,14 +91,64 @@ class Recursion:
 
         explore([])
         return result
+    
+    def logNamesN(self,name, n, i=0):
+        if i == n - 1:
+            print(name)
+            return
+        else :
+            print(name)
+            self.logNamesN(name, n, i + 1)
+
+
+    def sumNNumbers(self, n):
+        if n == 0 :
+            return 0
+        
+        return n + self.sumNNumbers(n - 1)
+    
+
+    def getSubsequences(self, arr):
+        result = []
+
+        def backtrack(i, subsequence):
+            result.append(subsequence.copy())
+
+            for j in range(i, len(arr)):
+                subsequence.append(arr[j])
+                backtrack( j + 1, subsequence)
+                subsequence.pop()
+
+
+        def backtrack1(idx, subsequence):
+            if idx == len(arr) :
+                result.append(subsequence.copy())
+                return
+            
+            subsequence.append(arr[idx])
+            backtrack1(idx + 1, subsequence)
+            subsequence.pop()
+            backtrack1(idx + 1, subsequence)
+
+        backtrack(0,[])
+        print(result)
+
+
 
 
 if __name__ == "__main__" :
     executor = Recursion()
-    arr = [1,2,3,3,4]
+    arr = [3,1,2]
 
     # print(executor.findSubsetSums([1,2,3]))
     # print(executor.check_sorted(arr, len(arr) - 1))
     # print(executor.binary_search(arr, 1,0, len(arr) - 1))
-    print(executor.make_words(['k','u','s','h']))
-    print(len(executor.make_words(['k','u','s','h'])))
+    # print(executor.make_words(['k','u','s','h']))
+    # print(len(executor.make_words(['k','u','s','h'])))
+
+    # executor.logNamesN("Kush",10)
+
+    # executor.log_1toN(10, True)
+    # print(executor.sumNNumbers(3))
+
+    executor.getSubsequences(arr)
