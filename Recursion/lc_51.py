@@ -23,7 +23,7 @@ class Solution:
             if board[r][col] == 'Q':
                 return False
             
-        # Attacks from left diagnol 
+        # Attacks from left diagonal 
         r,c = row - 1, col - 1
         while r >= 0 and c >=0 :
             if board[r][c] == 'Q':
@@ -31,7 +31,7 @@ class Solution:
             r -= 1
             c -=1
 
-        # Attacks from right diagnol
+        # Attacks from right diagonal
         r,c = row - 1, col + 1
         while r >= 0 and c < len(board):
             if board[r][c] == 'Q':
