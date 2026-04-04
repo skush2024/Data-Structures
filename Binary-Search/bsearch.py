@@ -1,4 +1,4 @@
-class Solution:
+class Search:
 
     def __init__(self, arr, target):
         arr.sort()
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     arr = [1,2,3,4,5,8]
     target = 3
 
-    solver = Solution(arr, target)
+    solver = Search(arr, target)
     # print(solver.recursive_search(0, len(arr) - 1))
     print(solver.search())
 
