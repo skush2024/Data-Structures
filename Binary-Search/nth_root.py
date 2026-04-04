@@ -10,6 +10,10 @@ class Solution:
         pass
 
     def pow(self, x,n):
+        if n < 0:
+            x = 1 / x
+            n = -n
+
         if n == 1: 
             return x
         if n == 2: 
@@ -20,6 +24,22 @@ class Solution:
         
         else :
             return x * self.pow(x, n-1)
+        
+    def myPow(self, x, n):
+        if n < 0 :
+            x = 1 / x
+            n = -N
+
+        result = 1
+
+        while n > 0:
+            if n % 2 == 1 :
+                result *= x
+
+            x *= x
+            n //= 2
+
+        return result
 
     def nthRoot(self, m,n):
         if n == 2 :
