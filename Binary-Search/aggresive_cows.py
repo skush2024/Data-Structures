@@ -47,6 +47,24 @@ class Solution:
                 high = distance_to_maintain - 1
         
         return ans
+    
+    def aggresiveCows(self, stalls,k):
+        stalls.sort()
+        result = []
+
+        def backtrack(cows_placed=0, position=[], start = 0):
+            if cows_placed == k :
+                result.append(position.copy())
+                return
+
+            for i in range(start, len(stalls)):
+                position.append(stalls[i])
+                backtrack(cows_placed + 1, position, i + 1)
+                position.pop()
+            
+        backtrack()
+        return(result)
+
         
 
 
@@ -55,7 +73,8 @@ class Solution:
 if __name__ == "__main__":
     solver = Solution()
 
-    nums = [4,2,1,3,6]
-    k = 2
+    nums = [1,2,3,4,5,6]
+    k = 3
 
-    print(solver.findMinDistance(nums, k))
+    # print(solver.findMinDistance(nums, k))
+    print(solver.aggresiveCows(nums,k))
