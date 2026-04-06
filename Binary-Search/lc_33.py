@@ -15,30 +15,29 @@ class Solution:
     
 
     def search(self, nums, target):
-        low = 0
-        high = len(nums) - 1
+        low, high = 0, len(nums) - 1
 
-        while low <= high :
+        while(low <= high):
             mid = int((low + high) / 2)
 
             if nums[mid] == target :
                 return mid
 
-            # If Left Part is Sorted
-            if nums[mid] >= nums[low]:
-                if nums[low] <= target and target < nums[mid] :
+            # This means left part is sorted
+            if nums[low] <= nums[mid]:
+                if nums[low] <= target and target <= nums[mid]:
                     high = mid - 1
-                
                 else :
                     low = mid + 1
-            
-            # If Right Part is Sorted
+
+            # This means right part is sorted
             else :
-                if nums[mid] < target and target <= nums[high]:
+                if nums[mid] <= target and target <= nums[high]:
                     low = mid + 1
                 else :
                     high = mid - 1
 
+        
         return -1
         
 
@@ -46,4 +45,4 @@ if __name__ == "__main__":
     solver = Solution()
 
     nums = [4,5,6,7,8,9,2]
-    print(solver.search(nums, 7))
+    print(solver.search(nums, 8))
