@@ -18,14 +18,31 @@ class Solution:
             while stack and stack[-1] <= nums2[i]:
                 stack.pop()
 
-            nge[nums2[i]] = stack[-1] if stack else 1
+            nge[nums2[i]] = stack[-1] if stack else -1
             stack.append(nums2[i])
         
         return [nge[i] for i in nums1]
+    
+    def nearestSmallerElement(self, nums):
+        stack = []
+        nse =  {}
+
+        for i in range(len(nums)):
+            while stack and stack[-1] >= nums[i]:
+                stack.pop()
+
+            nse[nums[i]] = stack[-1] if stack else -1
+            stack.append(nums[i])
+        
+
+        return nse
+        
+        
 
 if __name__ == "__main__":
         solver = Solution()
         nums1 = [1,2,3]
         nums2 = [1,3,2,0,4,5]
-        print(solver.nextGreaterElement(nums1, nums2))
+        # print(solver.nextGreaterElement(nums1, nums2))
+        print(solver.nearestSmallerElement(nums2))
         
