@@ -6,6 +6,35 @@ class Graph:
         self.graph = dependency
 
 
+    def hasCycle(self):
+        state = {node: 0 for node in self.graph}  # 0,1,2
+
+        def dfs(node):
+            if state[node] == 1:
+                return True
+            if state[node] == 2:
+                return False
+
+            state[node] = 1
+
+            for neighbor in self.graph[node]:
+                if dfs(neighbor):
+                    return True
+
+            state[node] = 2
+            return False
+
+        for node in self.graph:
+            if state[node] == 0:
+                if dfs(node):
+                    return True
+
+        return False
+
+
+
+
+
     def genPaths(self, start, dest):
         paths = []
 
@@ -44,12 +73,11 @@ class Graph:
 
 if __name__ == "__main__":
     graph = {
-        "home" : ["coffee shop", "gym", "park"],
-        "coffee shop" : ["park"],
-        "gym" : ["book store"],
-        "book store" : ["park"],
-        "park" : []
+        0: [1],
+        1: [2],
+        2: [3],
+        3: [1]  # cycle here: 1 -> 2 -> 3 -> 1
     }
 
     solver = Graph(graph)
-    solver.genPaths("home", "park")
+    print(solver.hasCycle())
