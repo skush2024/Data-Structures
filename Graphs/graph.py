@@ -32,8 +32,27 @@ class Graph:
         return False
 
 
+    def hasCycleBFS(self, start):
+        visited = [0] * len(self.graph)
+        queue = deque()
+        
+        queue.append([start, -1])
+        visited[start] = 1
 
+        while queue:
+            node, parent = queue.popleft()
 
+            for neighbor in self.graph[node]:
+                if neighbor == parent:
+                    continue
+
+                if visited[neighbor] == 1:
+                    return True
+                
+                visited[neighbor] = 1
+                queue.append([neighbor, node])
+        
+        return False
 
     def genPaths(self, start, dest):
         paths = []
@@ -80,4 +99,4 @@ if __name__ == "__main__":
     }
 
     solver = Graph(graph)
-    print(solver.hasCycle())
+    print(solver.hasCycleBFS(0))
